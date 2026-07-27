@@ -2,24 +2,26 @@ import React from "react";
 
 const CV = () => {
   return (
-    <section className="min-h-screen bg-[#0f172a] flex items-center justify-center px-6 py-20">
-      <div className="text-center">
-        {/* CV Image */}
-        <img
-          src="/images/cv-preview.png"
-          alt="CV Preview"
-          className="max-w-4xl w-full rounded-xl shadow-2xl border border-gray-700"
-        />
+    <section className="py-20 text-center bg-slate-900">
+      <h2 className="text-4xl text-white font-bold mb-8">
+        My CV
+      </h2>
 
-        {/* Download Button */}
-        <a
-          href="/cv/Amr-Ashraf-CV.pdf"
-          download
-          className="inline-block mt-8 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition duration-300"
-        >
-          Download CV
-        </a>
-      </div>
+      {/* img CV */}
+      <img
+        src="/cv.png"
+        alt="My CV"
+        className="mx-auto w-full max-w-3xl rounded-lg shadow-lg"
+      />
+
+      {/* download PDF */}
+      <a
+        href="/cv.pdf"
+        download
+        className="inline-block mt-6 px-6 py-3 bg-blue-500 text-white rounded-lg"
+      >
+        Download CV
+      </a>
     </section>
   );
 };

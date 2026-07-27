@@ -1,36 +1,40 @@
-import React from "react";
-import { Element } from "react-scroll";
-
 import Hero from "../sections/Hero";
 import About from "../sections/About";
 import Skills from "../sections/Skills";
 import Projects from "../sections/Projects";
 import Contact from "../sections/Contact";
 
+
 const Home = () => {
   return (
-    <>
-      <Element name="hero">
-        <Hero />
-      </Element>
+    <main className="bg-slate-900 text-white">
 
-      <Element name="about">
+      <Hero />
+
+
+      <section id="about">
         <About />
-      </Element>
+      </section>
 
-      <Element name="skills">
+
+      <section id="skills">
         <Skills />
-      </Element>
+      </section>
 
-      <Element name="projects">
+
+      <section id="projects">
         <Projects />
-      </Element>
+      </section>
 
-      <Element name="contact">
+
+      <section id="contact">
         <Contact />
-      </Element>
-    </>
+      </section>
+
+
+    </main>
   );
 };
+
 
 export default Home;

@@ -1,166 +1,103 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Link as ScrollLink } from "react-scroll";
-import { Menu, X } from "lucide-react";
+import { HashLink } from "react-router-hash-link";
+import { FaBars, FaTimes } from "react-icons/fa";
+import { useState } from "react";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
+  const links = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/#about" },
+    { name: "Skills", path: "/#skills" },
+    { name: "Projects", path: "/#projects" },
+    { name: "Contact", path: "/#contact" },
+    { name: "CV", path: "/cv" },
+  ];
+
   return (
-    <nav className="fixed top-0 left-0 w-full bg-slate-950/90 backdrop-blur-md z-50 shadow-lg">
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+    <nav className="fixed top-0 left-0 w-full bg-slate-900 text-white z-50 shadow-lg">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
         {/* Logo */}
-        <h1 className="text-2xl font-bold text-cyan-400 cursor-pointer">
-          Amr<span className="text-white">.</span>
-        </h1>
+        <Link
+          to="/"
+          className="text-2xl font-bold text-blue-400"
+        >
+          Amr
+        </Link>
 
-        {/* Desktop */}
-        <ul className="hidden md:flex items-center gap-8 text-white">
-          <li>
-            <ScrollLink
-              to="hero"
-              smooth={true}
-              duration={500}
-              className="cursor-pointer hover:text-cyan-400 transition"
-            >
-              Home
-            </ScrollLink>
-          </li>
 
-          <li>
-            <ScrollLink
-              to="about"
-              smooth={true}
-              duration={500}
-              className="cursor-pointer hover:text-cyan-400 transition"
-            >
-              About
-            </ScrollLink>
-          </li>
+        {/* Desktop Menu */}
+        <ul className="hidden md:flex gap-8">
+          {links.map((link) => (
+            <li key={link.name}>
 
-          <li>
-            <ScrollLink
-              to="skills"
-              smooth={true}
-              duration={500}
-              className="cursor-pointer hover:text-cyan-400 transition"
-            >
-              Skills
-            </ScrollLink>
-          </li>
+              {link.path.includes("#") ? (
+                <HashLink
+                  smooth
+                  to={link.path}
+                  className="hover:text-blue-400 transition"
+                >
+                  {link.name}
+                </HashLink>
+              ) : (
+                <Link
+                  to={link.path}
+                  className="hover:text-blue-400 transition"
+                >
+                  {link.name}
+                </Link>
+              )}
 
-          <li>
-            <ScrollLink
-              to="projects"
-              smooth={true}
-              duration={500}
-              className="cursor-pointer hover:text-cyan-400 transition"
-            >
-              Projects
-            </ScrollLink>
-          </li>
-
-          <li>
-            <ScrollLink
-              to="contact"
-              smooth={true}
-              duration={500}
-              className="cursor-pointer hover:text-cyan-400 transition"
-            >
-              Contact
-            </ScrollLink>
-          </li>
-
-          <li>
-            <Link
-              to="/cv"
-              className="bg-cyan-500 hover:bg-cyan-600 px-5 py-2 rounded-lg transition"
-            >
-              CV
-            </Link>
-          </li>
+            </li>
+          ))}
         </ul>
+
 
         {/* Mobile Button */}
         <button
-          className="md:hidden text-white"
+          className="md:hidden text-2xl"
           onClick={() => setOpen(!open)}
         >
-          {open ? <X size={28} /> : <Menu size={28} />}
+          {open ? <FaTimes /> : <FaBars />}
         </button>
+
       </div>
+
 
       {/* Mobile Menu */}
       {open && (
-        <div className="md:hidden bg-slate-900 py-6">
-          <ul className="flex flex-col items-center gap-6 text-white">
-            <li>
-              <ScrollLink
-                to="hero"
-                smooth={true}
-                duration={500}
-                onClick={() => setOpen(false)}
-              >
-                Home
-              </ScrollLink>
-            </li>
+        <ul className="md:hidden bg-slate-800 px-6 py-5 space-y-4">
 
-            <li>
-              <ScrollLink
-                to="about"
-                smooth={true}
-                duration={500}
-                onClick={() => setOpen(false)}
-              >
-                About
-              </ScrollLink>
-            </li>
+          {links.map((link) => (
+            <li key={link.name}>
 
-            <li>
-              <ScrollLink
-                to="skills"
-                smooth={true}
-                duration={500}
-                onClick={() => setOpen(false)}
-              >
-                Skills
-              </ScrollLink>
-            </li>
+              {link.path.includes("#") ? (
+                <HashLink
+                  smooth
+                  to={link.path}
+                  onClick={() => setOpen(false)}
+                  className="block hover:text-blue-400"
+                >
+                  {link.name}
+                </HashLink>
+              ) : (
+                <Link
+                  to={link.path}
+                  onClick={() => setOpen(false)}
+                  className="block hover:text-blue-400"
+                >
+                  {link.name}
+                </Link>
+              )}
 
-            <li>
-              <ScrollLink
-                to="projects"
-                smooth={true}
-                duration={500}
-                onClick={() => setOpen(false)}
-              >
-                Projects
-              </ScrollLink>
             </li>
+          ))}
 
-            <li>
-              <ScrollLink
-                to="contact"
-                smooth={true}
-                duration={500}
-                onClick={() => setOpen(false)}
-              >
-                Contact
-              </ScrollLink>
-            </li>
-
-            <li>
-              <Link
-                to="/cv"
-                onClick={() => setOpen(false)}
-                className="bg-cyan-500 px-5 py-2 rounded-lg"
-              >
-                CV
-              </Link>
-            </li>
-          </ul>
-        </div>
+        </ul>
       )}
+
     </nav>
   );
 };
